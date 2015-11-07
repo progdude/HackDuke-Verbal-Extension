@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "HackDuke Verbal",
+  "description": "",
+  "version": "1.0",
+
+  "options_page": "options.html",
+
+  "browser_action": {
+   "default_popup": "index.html"
+  },
+
+  "background": {
+    "page": "background.html"
+  }
+
+
+}
