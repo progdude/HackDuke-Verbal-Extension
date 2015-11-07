@@ -1,7 +1,7 @@
 var bg = chrome.extension.getBackgroundPage();
 
 function fun(){
-	console.log("heo");
+	chrome.tabs.create({ url: "http://google.com"});
 }
 
 document.getElementById('s').onclick = fun;
