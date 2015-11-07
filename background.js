@@ -3,6 +3,7 @@ if (annyang) {
   var commands = {
     'hello': function() {
       console.log("hello");
+
     }
   };
 
