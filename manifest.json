@@ -1,10 +1,14 @@
 {
   "manifest_version": 2,
 
-  "name": "HackDuke Verbal",
+  "name": "Sermos",
   "description": "",
   "version": "1.0",
-
+  "permissions": [
+    "tabs",
+    "history",
+    "activeTab"
+  ],
   "options_page": "options.html",
 
   "browser_action": {
