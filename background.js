@@ -1,6 +1,39 @@
 "use strict";
 
-var activeTab;
+//capitalOne
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+var names = [];
+var ids = [];
+var account = [];
+
+function findId(nickname){
+    for(var i=0; i<ids.length; i++){
+      if(nickname[i]==nickname){
+        return accounts[i];
+      }
+    }
+  }
+
+$.get( "http://api.reimaginebanking.com/accounts?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
+  console.log("whats up");
+  for(var i=0; i<data.length; i++){
+    console.log()
+    account[i] =data[i]._id;
+    names[i] = data[i].nickname;//.replace("s Account","");//str.replace("Microsoft", "W3Schools");
+    ids[i] = data[i].customer_id;
+      }
+});
+
+sleep(1000);
+
 
 if (annyang) {
   console.log("listening");
@@ -40,6 +73,13 @@ if (annyang) {
             }
         });
     });
+},
+
+'close all':function() {
+  console.log("close all");
+  chrome.runtime.sendMessage({
+        greeting: "closeAll"
+      });
 }
 
 

@@ -19,9 +19,21 @@ chrome.runtime.onMessage.addListener(
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.greeting == "close"){
-    	chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
-    		chrome.tabs.remove(tab.id, function(){});
+    	chrome.tabs.getSelected(null, function (tab) {
+    		chrome.tabs.remove(tab.id, function(){ });
     	});
+ 
+  }
+});
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "closeAll"){
+    	chrome.tabs.getAllInWindow(null, function(tabs){
+    	for (var i = 0; i < tabs.length; i++) {
+    		chrome.tabs.remove(tabs[i].id);                         
+    }
+});
  
   }
 });
