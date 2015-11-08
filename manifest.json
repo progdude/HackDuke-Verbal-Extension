@@ -13,7 +13,12 @@
 
   "background": {
     "page": "background.html"
-  }
+  },
+
+  "permissions": [
+          "history",
+          "activeTab"
+  ]
 
 
 }
