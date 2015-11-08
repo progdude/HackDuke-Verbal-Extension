@@ -7,19 +7,27 @@ $.ajaxSetup({
 
 var names = [];
 var ids = [];
+var account = [];
 
-$.get( "http://api.reimaginebanking.com/customers?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
-  //console.log(data);
+
+
+$.get( "http://api.reimaginebanking.com/accounts?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
+  console.log("whats up");
   for(var i=0; i<data.length; i++){
-    ids[i] = data[i]._id;
-    names[i] = data[i].first_name;
-  }
+    account[i] =data[i]._id;
+    names[i] = data[i].nickname;//.replace("s Account","");//str.replace("Microsoft", "W3Schools");
+    ids[i] = data[i].customer_id;
+      }
 });
 
-  function findId(name){
+for(var f = 0; f<names.lenght; f++){
+  console.log(names[f]);
+}
+
+  function findId(nickname){
     for(var i=0; i<ids.length; i++){
-      if(name[i]==name){
-        return ids[i];
+      if(nickname[i]==nickname){
+        return accounts[i];
       }
     }
   }
@@ -35,23 +43,26 @@ if (annyang) {
           chrome.tabs.create({ url: url1});
     },
 
-    'deposit :money in :account': function(money, account){
-      //console.log(money+" "+account);
-      $.post( "http://api.reimaginebanking.com/accounts/"+money+"/deposits?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
+    'deposit :money in *account': function(money, account){
+      console.log(money+" "+account);
+      var acc = findId(account);
+      $.post( "http://api.reimaginebanking.com/accounts/"+money+"/deposits?key="+acc, function( data ) {
         console.log(data);
     });
     },
 
     'go back': function(){
       console.log("swag");
-
-
-      chrome.history.search({text: '', maxResults: 1}, function(data) {
+      var count=0;
+      chrome.history.search({text: '', maxResults: 2}, function(data) {
           data.forEach(function(page) {
+            count++;
+            if(count==2){
               chrome.runtime.sendMessage({
                 greeting: "back",
                 url: page.url
               });
+            }
         });
     });
 }
