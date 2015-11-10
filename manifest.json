@@ -1,24 +1,28 @@
 {
   "manifest_version": 2,
 
-  "name": "HackDuke Verbal",
+  "name": "Sermos",
   "description": "",
   "version": "1.0",
-
+  "permissions": [
+    "tabs",
+    "history",
+    "activeTab"
+  ],
   "options_page": "options.html",
 
   "browser_action": {
    "default_popup": "index.html"
   },
+  "icons": {
+      "16": "sermos16.png",
+      "48": "sermos48.png",
+      "128": "sermos128.png"
+    },
 
   "background": {
     "page": "background.html"
-  },
-
-  "permissions": [
-          "history",
-          "activeTab"
-  ]
+  }
 
 
 }

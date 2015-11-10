@@ -7,15 +7,33 @@ chrome.runtime.onMessage.addListener(
 }
 });
 
-document.getElementById('ad').addEventListener('onclick', add);
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "goto"){
+    	chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
+      chrome.tabs.update(tab.id, {url: request.url});
+  })
+}
+});
 
-function add(){
-	var command = document.getElementById("command").value;
-	var website = document.getElementById("website").value;
-	     
-        chrome.runtime.sendMessage({
-            greeting: "add",
-            command: command,
-            website: website
-         });
-}    
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "close"){
+    	chrome.tabs.getSelected(null, function (tab) {
+    		chrome.tabs.remove(tab.id, function(){ });
+    	});
+ 
+  }
+});
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "closeAll"){
+    	chrome.tabs.getAllInWindow(null, function(tabs){
+    	for (var i = 0; i < tabs.length; i++) {
+    		chrome.tabs.remove(tabs[i].id);                         
+    }
+});
+ 
+  }
+});
