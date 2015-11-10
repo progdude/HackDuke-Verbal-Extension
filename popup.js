@@ -6,5 +6,16 @@ chrome.runtime.onMessage.addListener(
   })
 }
 });
-    
-  
+
+document.getElementById('ad').addEventListener('onclick', add);
+
+function add(){
+	var command = document.getElementById("command").value;
+	var website = document.getElementById("website").value;
+	     
+        chrome.runtime.sendMessage({
+            greeting: "add",
+            command: command,
+            website: website
+         });
+}    

@@ -13,10 +13,12 @@ function sleep(milliseconds) {
 var names = [];
 var ids = [];
 var account = [];
+var commands = [];
+var arr = [];
 
 
 
-$.get( "http://api.reimaginebanking.com/accounts?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
+/*$.get( "http://api.reimaginebanking.com/accounts?key=20496afd86b44b0ec2e8631b6947d265", function( data ) {
   console.log("whats up");
   for(var i=0; i<data.length; i++){
     console.log()
@@ -24,14 +26,10 @@ $.get( "http://api.reimaginebanking.com/accounts?key=20496afd86b44b0ec2e8631b694
     names[i] = data[i].nickname;//.replace("s Account","");//str.replace("Microsoft", "W3Schools");
     ids[i] = data[i].customer_id;
       }
-});
+});*/
 
 sleep(1000);
 
-//for(var f = 0; f<names.length; f++){
-
-  //console.log(names[0]);
-//}
 
   function findId(nickname){
     for(var i=0; i<ids.length; i++){
@@ -42,9 +40,29 @@ sleep(1000);
   }
 
 
+  function ok(website){
+    chrome.tabs.create({url: request.website});
+  }
+
+  chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "add"){
+      //arr.push(request.command: ok(request.website));
+  }
+  });
+
+  var h= "swag";
+  var j = "http://google.com";
+
+
+
 if (annyang) {
   // Let's define our first command. First the text we expect, and then the function it should call
-  var commands = {
+  commands = {
+
+    h: function(){
+      console.log(j);
+    },
 
     'go to *term': function(term){
           var url1="http://"+term+".com";
